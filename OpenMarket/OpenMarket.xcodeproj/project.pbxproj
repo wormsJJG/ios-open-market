@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		351049722907A4AC00F92E73 /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 351049712907A4AC00F92E73 /* Error.swift */; };
 		351049742907B56E00F92E73 /* Vendors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 351049732907B56E00F92E73 /* Vendors.swift */; };
+		351049762907B60A00F92E73 /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 351049752907B60A00F92E73 /* Image.swift */; };
 		C70FB0FB25BEF61C00C9924E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70FB0FA25BEF61C00C9924E /* AppDelegate.swift */; };
 		C70FB0FD25BEF61C00C9924E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70FB0FC25BEF61C00C9924E /* SceneDelegate.swift */; };
 		C70FB0FF25BEF61C00C9924E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70FB0FE25BEF61C00C9924E /* ViewController.swift */; };
@@ -22,6 +23,7 @@
 /* Begin PBXFileReference section */
 		351049712907A4AC00F92E73 /* Error.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Error.swift; sourceTree = "<group>"; };
 		351049732907B56E00F92E73 /* Vendors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vendors.swift; sourceTree = "<group>"; };
+		351049752907B60A00F92E73 /* Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
 		C70FB0F725BEF61C00C9924E /* OpenMarket.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OpenMarket.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C70FB0FA25BEF61C00C9924E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C70FB0FC25BEF61C00C9924E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -115,6 +117,7 @@
 				FB07033E29062A55006775BD /* ProductListPage.swift */,
 				FB07034029062E66006775BD /* Product.swift */,
 				351049732907B56E00F92E73 /* Vendors.swift */,
+				351049752907B60A00F92E73 /* Image.swift */,
 			);
 			path = Struct;
 			sourceTree = "<group>";
@@ -190,6 +193,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C70FB0FF25BEF61C00C9924E /* ViewController.swift in Sources */,
+				351049762907B60A00F92E73 /* Image.swift in Sources */,
 				FB07033F29062A55006775BD /* ProductListPage.swift in Sources */,
 				C70FB0FB25BEF61C00C9924E /* AppDelegate.swift in Sources */,
 				C70FB0FD25BEF61C00C9924E /* SceneDelegate.swift in Sources */,
