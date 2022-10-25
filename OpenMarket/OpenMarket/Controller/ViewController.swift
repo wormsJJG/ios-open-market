@@ -8,6 +8,7 @@ import UIKit
 
 class ViewController: UIViewController {
     let url = URL(string: "https://openmarket.yagom-academy.kr/api/products?page_no=1&items_per_page=100")!
+    let url2 = URL(string: "https://openmarket.yagom-academy.kr/api/products/60")!
     let session = URLSession(configuration: .default)
     let decoder = JSONDecoder()
     
@@ -26,5 +27,20 @@ class ViewController: UIViewController {
             }
         }
         task.resume()
+        let task2 = session.dataTask(with: url2) { (data, response, error) in
+            if let jsonData = data {
+                do {
+                    let product = try self.decoder.decode(Product.self, from: jsonData)
+                    print(product.vendorID)
+                    print(product.vendorName)
+                    print(product.vendors)
+                } catch {
+                    print(error.localizedDescription)
+                }
+            } else{
+                print("실패")
+            }
+        }
+        task2.resume()
     }
 }
