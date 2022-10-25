@@ -42,5 +42,3 @@ struct Product: Codable {
         case vendors
     }
 }
-
-

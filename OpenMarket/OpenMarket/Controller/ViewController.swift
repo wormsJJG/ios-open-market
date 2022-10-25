@@ -18,7 +18,7 @@ class ViewController: UIViewController {
             if let jsonData = data {
                 do {
                     let page = try self.decoder.decode(ProductListPage.self, from: jsonData)
-                    print(page.productList.count)
+                    print(page.pageNo)
                 } catch {
                     print(error.localizedDescription)
                 }
@@ -31,8 +31,8 @@ class ViewController: UIViewController {
             if let jsonData = data {
                 do {
                     let product = try self.decoder.decode(Product.self, from: jsonData)
-                    print(product.vendorID)
-                    print(product.vendorName)
+                    print(product.createdAt)
+                    print(product.issuedAt)
                     print(product.vendors)
                 } catch {
                     print(error.localizedDescription)
