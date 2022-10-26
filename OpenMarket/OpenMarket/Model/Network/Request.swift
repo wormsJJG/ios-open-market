@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum API {
+enum Request {
     static let apiHost = "https://openmarket.yagom-academy.kr"
     
     case getProductList(pageNo: Int, itemsPerPage: Int)
@@ -16,9 +16,9 @@ enum API {
     var url: String {
         switch self {
         case .getProductList(pageNo: let pageNo, itemsPerPage: let itemsPerPage):
-            return "\(API.apiHost)/api/products?page_no=\(pageNo)&items_per_page=\(itemsPerPage)"
+            return "\(Request.apiHost)/api/products?page_no=\(pageNo)&items_per_page=\(itemsPerPage)"
         case .getProduntInfo(productId: let productId):
-            return "\(API.apiHost)/api/products/\(productId)"
+            return "\(Request.apiHost)/api/products/\(productId)"
         }
     }
 }
