@@ -14,7 +14,7 @@ struct Product: Codable {
     let name: String
     let description: String?
     let thumbnail: String
-    let currency: String
+    let currency: Currency
     let price: Int
     let bargainPrice: Int
     let discountedPrice: Int
@@ -23,8 +23,6 @@ struct Product: Codable {
     let issuedAt: String
     let images: [Image]?
     let vendors: Vendors?
-    
-    
     
     enum CodingKeys: String, CodingKey {
         case id
