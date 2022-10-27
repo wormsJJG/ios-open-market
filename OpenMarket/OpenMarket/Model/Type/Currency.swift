@@ -8,6 +8,6 @@
 import Foundation
 
 enum Currency: String, Decodable {
-    case USD
-    case KRW
+    case usd = "USD"
+    case krw = "KRW"
 }

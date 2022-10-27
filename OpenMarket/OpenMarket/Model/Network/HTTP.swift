@@ -7,11 +7,11 @@
 
 import Foundation
 
-enum HTTPMethod: String {
-    case GET = "GET"
-    case POST = "POST"
-    case PATCH = "PATCH"
-    case DELETE = "DELETE"
+enum HTTPMethod {
+    static let get: String = "GET"
+    static let post: String = "POST"
+    static let patch: String = "PATCH"
+    static let delete: String = "DELETE"
 }
 
 enum HTTPStatus {

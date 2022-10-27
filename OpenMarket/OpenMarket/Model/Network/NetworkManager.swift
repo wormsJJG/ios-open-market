@@ -14,26 +14,26 @@ class NetworkManager {
         self.urlSession = URLSession.shared
     }
     
-    func dataTask(request: URLRequest, completionHandler: @escaping(Result<Data, NetworkError>) -> Void ) {
+    func dataTask(request: URLRequest, completion: @escaping(Result<Data, NetworkError>) -> Void ) {
         let task = self.urlSession.dataTask(with: request) { (data, urlResponse, error) in
             guard let httpResponse = urlResponse as? HTTPURLResponse, (HTTPStatus.ok.range).contains(httpResponse.statusCode) else {
-                return completionHandler(.failure(.HTTPStatusCodeError))
+                return completion(.failure(.HTTPStatusCodeError))
             }
             guard let data = data else {
-                return completionHandler(.failure(.ImportDataFailed))
+                return completion(.failure(.ImportDataFailed))
             }
-            completionHandler(.success(data))
+            completion(.success(data))
         }
         task.resume()
     }
     
-    func getData(requestType: Request, completionHandler: @escaping(Result<Data, NetworkError>) -> Void ) {
+    func getData(requestType: Request, completion: @escaping(Result<Data, NetworkError>) -> Void ) {
         guard let url = URL(string: requestType.url) else {
-            return completionHandler(.failure(NetworkError.UnownURL))
+            return completion(.failure(NetworkError.UnownURL))
         }
         var request = URLRequest(url: url)
-        request.httpMethod = HTTPMethod.GET.rawValue
+        request.httpMethod = HTTPMethod.get
         
-        dataTask(request: request, completionHandler: completionHandler)
+        dataTask(request: request, completion: completion)
     }
 }
