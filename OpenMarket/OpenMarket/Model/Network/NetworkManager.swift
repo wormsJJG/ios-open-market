@@ -16,6 +16,7 @@ class NetworkManager {
     
     func dataTask(request: URLRequest, completion: @escaping(Result<Data, NetworkError>) -> Void ) {
         let task = self.urlSession.dataTask(with: request) { (data, urlResponse, error) in
+            
             guard let httpResponse = urlResponse as? HTTPURLResponse, (HTTPStatus.ok.range).contains(httpResponse.statusCode) else {
                 return completion(.failure(.HTTPStatusCodeError))
             }
