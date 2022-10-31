@@ -8,17 +8,17 @@
 import Foundation
 
 enum NetworkError: Error, LocalizedError {
-    case HTTPStatusCodeError
-    case ImportDataFailed
-    case UnownURL
+    case statusCodeError
+    case importDataFailed
+    case invalidURL
     
     var errorDescription: String {
         switch self {
-        case .HTTPStatusCodeError:
+        case .statusCodeError:
             return "HTTP 상태 코드 에러"
-        case .ImportDataFailed:
+        case .importDataFailed:
             return "데이터 불러오기 실패"
-        case .UnownURL:
+        case .invalidURL:
             return "알수없는 URL"
         }
     }
