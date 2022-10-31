@@ -31,7 +31,7 @@ final class OpenMarketTests: XCTestCase {
     
     func test_Network() {
         let networkManager = NetworkManager()
-        networkManager.getData(requestType: Request.getProductList(pageNo: 1, itemsPerPage: 100)) { result in
+        networkManager.getData(requestType: Request.productList(pageNo: 1, itemsPerPage: 100)) { result in
             switch result {
             case .success(let jsonData):
                 guard let productListPage = try? JSONDecoder().decode(ProductListPage.self, from: jsonData) else {
