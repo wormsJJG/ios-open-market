@@ -15,9 +15,9 @@ struct Page: Decodable {
     let description: String
     let thumbnail: String
     let currency: Currency
-    let price: Int
-    let bargainPrice: Int
-    let discountedPrice: Int
+    let price: Float
+    let bargainPrice: Float
+    let discountedPrice: Float
     let stock: Int
     let createdAt: String
     let issuedAt: String

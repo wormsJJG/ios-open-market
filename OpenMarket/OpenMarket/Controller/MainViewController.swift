@@ -25,7 +25,7 @@ class MainViewController: UIViewController {
             case .success(let data):
                 do {
                     let productListPage = try JSONDecoder().decode(ProductListPage.self, from: data)
-                    print(productListPage)
+                    print(productListPage.pages.count)
                 } catch {
                     print(error.localizedDescription)
                 }
