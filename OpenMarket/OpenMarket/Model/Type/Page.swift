@@ -10,6 +10,7 @@ import Foundation
 struct Page: Decodable {
     let id: Int
     let vendorID: Int
+    let vendorName: String
     let name: String
     let description: String
     let thumbnail: String
@@ -24,6 +25,7 @@ struct Page: Decodable {
     enum CodingKeys: String, CodingKey {
         case id
         case vendorID = "vendor_id"
+        case vendorName
         case name
         case description
         case thumbnail
