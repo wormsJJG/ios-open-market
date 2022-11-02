@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Page: Decodable {
+struct Page: Decodable, Hashable {
     let id: Int
     let vendorID: Int
     let vendorName: String
@@ -15,9 +15,9 @@ struct Page: Decodable {
     let description: String
     let thumbnail: String
     let currency: Currency
-    let price: Float
-    let bargainPrice: Float
-    let discountedPrice: Float
+    let price: Double
+    let bargainPrice: Double
+    let discountedPrice: Double
     let stock: Int
     let createdAt: String
     let issuedAt: String
