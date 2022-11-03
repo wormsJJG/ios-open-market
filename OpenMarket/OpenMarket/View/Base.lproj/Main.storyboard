@@ -58,6 +58,9 @@
                                 <segment title="List"/>
                                 <segment title="Grid"/>
                             </segments>
+                            <connections>
+                                <action selector="didChangeSegmentControl:" destination="BYZ-38-t0r" eventType="valueChanged" id="5v4-MV-li4"/>
+                            </connections>
                         </segmentedControl>
                         <barButtonItem key="rightBarButtonItem" style="plain" id="WQp-GH-MHY">
                             <imageReference key="image" image="plus" catalog="system" symbolScale="small"/>

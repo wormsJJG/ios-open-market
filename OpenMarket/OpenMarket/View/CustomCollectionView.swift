@@ -23,10 +23,10 @@ final class CustomCollectionView: UICollectionView {
     
     private lazy var gridLayout: UICollectionViewFlowLayout = {
         let layout = UICollectionViewFlowLayout()
-        let inset: CGFloat = 20
+        let inset: CGFloat = 10
         let rowItem = 2
         let width = (safeAreaLayoutGuide.layoutFrame.width / CGFloat(rowItem)) - (inset * 1.5)
-        let height = (safeAreaLayoutGuide.layoutFrame.height / 2.5) - inset
+        let height = (safeAreaLayoutGuide.layoutFrame.height / 2.6) - inset
         
         layout.minimumLineSpacing = inset
         layout.minimumInteritemSpacing = inset

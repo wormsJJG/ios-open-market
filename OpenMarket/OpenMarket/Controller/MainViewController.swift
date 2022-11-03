@@ -17,6 +17,7 @@ final class MainViewController: UIViewController {
     @IBOutlet weak private var pageCollectionView: CustomCollectionView!
     
     private let listCellID: String = "ListPageCell"
+    private let gridCellID: String = "GridPageCell"
     private var productListPage: ProductListPage?
     private let networkManager = NetworkManager()
     
@@ -29,7 +30,11 @@ final class MainViewController: UIViewController {
             cell.configureCell(page: itemIdentifier)
             return cell
         case .grid:
-            return UICollectionViewListCell()
+            guard let cell = pageCollectionView.dequeueReusableCell(withReuseIdentifier: self.gridCellID, for: indexPath) as? GridPageCell else {
+                return UICollectionViewCell()
+            }
+            cell.configure(page: itemIdentifier)
+            return cell
         case .none:
             return UICollectionViewListCell()
         }
@@ -55,10 +60,24 @@ final class MainViewController: UIViewController {
     private func configure() {
         pageCollectionView.changeLayout(type: .list)
         pageCollectionView.register(ListPageCell.self, forCellWithReuseIdentifier: listCellID)
+        pageCollectionView.register(GridPageCell.self, forCellWithReuseIdentifier: gridCellID)
         self.view.addSubview(activityIndicator)
         self.activityIndicator.startAnimating()
         getProductListPage()
-        
+    }
+    
+    
+    @IBAction func didChangeSegmentControl(_ sender: UISegmentedControl) {
+        switch CustomCollectionView.ViewType(rawValue: sender.selectedSegmentIndex) {
+        case .list:
+            pageCollectionView.changeLayout(type: .list)
+            pageCollectionView.reloadData()
+        case .grid:
+            pageCollectionView.changeLayout(type: .grid)
+            pageCollectionView.reloadData()
+        case .none:
+            return
+        }
     }
     
     private func getProductListPage() {
