@@ -6,8 +6,7 @@
 
 import UIKit
 
-final class MainViewController: UIViewController {
-    
+final class MainViewController: UIViewController, UIGestureRecognizerDelegate {
     enum Section {
         case main
     }
@@ -20,6 +19,7 @@ final class MainViewController: UIViewController {
     private let gridCellID: String = "GridPageCell"
     private var productListPage: ProductListPage?
     private let networkManager = NetworkManager()
+    private let swipeGesture = UISwipeGestureRecognizer()
     
     private lazy var dataSource = UICollectionViewDiffableDataSource<Section, Page>(collectionView: pageCollectionView) { pageCollectionView, indexPath, itemIdentifier in
         switch CustomCollectionView.ViewType(rawValue: self.viewTypeSegmentControl.selectedSegmentIndex) {
@@ -64,6 +64,9 @@ final class MainViewController: UIViewController {
         self.view.addSubview(activityIndicator)
         self.activityIndicator.startAnimating()
         getProductListPage()
+        swipeGesture.direction = .right
+        swipeGesture.addTarget(self, action: #selector(didSwipe))
+        self.view.addGestureRecognizer(swipeGesture)
     }
     
     
@@ -109,5 +112,15 @@ final class MainViewController: UIViewController {
             self?.dataSource.apply(snapShot, animatingDifferences: false)
             self?.activityIndicator.stopAnimating()
         }
+    }
+    
+    @objc func didSwipe(sender: UIGestureRecognizer) {
+        let isLeftSwipe = viewTypeSegmentControl.selectedSegmentIndex == 0
+        swipeGesture.direction = isLeftSwipe ? .left : .right
+        
+        viewTypeSegmentControl.selectedSegmentIndex = isLeftSwipe ? 1 : 0
+        
+        pageCollectionView.changeLayout(type: isLeftSwipe ? .grid : .list)
+        pageCollectionView.reloadData()
     }
 }

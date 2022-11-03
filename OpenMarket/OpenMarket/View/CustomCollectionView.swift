@@ -45,5 +45,7 @@ final class CustomCollectionView: UICollectionView {
         case.grid:
             setCollectionViewLayout(gridLayout, animated: true)
         }
+        
+        self.setContentOffset(CGPoint(x: 0, y: 0), animated: false)
     }
 }
