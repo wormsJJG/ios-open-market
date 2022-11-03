@@ -43,8 +43,8 @@ final class ListPageCell: UICollectionViewListCell, CellSelectable {
     
     private func constraint() {
         guard contentLayout == nil else { return }
-        
-        self.accessories = [.disclosureIndicator()]
+        let indicator = UICellAccessory.disclosureIndicator()
+        self.accessories = [indicator]
         
         [listContentView, stockLabel, thumbnailImage].forEach {
             contentView.addSubview($0)

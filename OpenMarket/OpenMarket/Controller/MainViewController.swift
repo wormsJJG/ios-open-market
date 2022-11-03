@@ -19,6 +19,7 @@ final class MainViewController: UIViewController {
     private let listCellID: String = "ListPageCell"
     private var productListPage: ProductListPage?
     private let networkManager = NetworkManager()
+    
     private lazy var dataSource = UICollectionViewDiffableDataSource<Section, Page>(collectionView: pageCollectionView) { pageCollectionView, indexPath, itemIdentifier in
         switch CustomCollectionView.ViewType(rawValue: self.viewTypeSegmentControl.selectedSegmentIndex) {
         case .list:
@@ -53,9 +54,10 @@ final class MainViewController: UIViewController {
     
     private func configure() {
         pageCollectionView.changeLayout(type: .list)
-        self.view.addSubview(activityIndicator)
-        getProductListPage()
         pageCollectionView.register(ListPageCell.self, forCellWithReuseIdentifier: listCellID)
+        self.view.addSubview(activityIndicator)
+        self.activityIndicator.startAnimating()
+        getProductListPage()
         
     }
     
