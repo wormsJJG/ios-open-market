@@ -9,7 +9,9 @@ import UIKit
 
 final class GridPageCell: UICollectionViewCell, CellSelectable {
     var productId: Int?
-    private lazy var productImage: UIImageView = UIImageView()
+    private let imageCache = ImageCache.shared
+    
+    private lazy var thumbnailImage: UIImageView = UIImageView()
     
     private lazy var productTitle: UILabel = {
         let lable = UILabel()
@@ -53,7 +55,7 @@ final class GridPageCell: UICollectionViewCell, CellSelectable {
     }()
     
     private lazy var vStackView: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [productImage, productTitle, priceLabelStackView, productStockLabel])
+        let stackView = UIStackView(arrangedSubviews: [thumbnailImage, productTitle, priceLabelStackView, productStockLabel])
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.alignment = .center
         stackView.distribution = .equalSpacing
@@ -75,7 +77,7 @@ final class GridPageCell: UICollectionViewCell, CellSelectable {
     override func prepareForReuse() {
         super.prepareForReuse()
         productPriceLabel.attributedText = nil
-        productImage.image = nil
+        thumbnailImage.image = nil
     }
     
     private func setCellLayer() {
@@ -93,51 +95,61 @@ final class GridPageCell: UICollectionViewCell, CellSelectable {
             vStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -inset),
             vStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             vStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            productImage.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.8),
-            productImage.heightAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.6)
+            thumbnailImage.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.8),
+            thumbnailImage.heightAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.6)
         ])
     }
     
     func configure(page: Page) {
+        productId = page.id
+        productTitle.text = page.name
+        setThumbnailImage(thumbnail: page.thumbnail)
+        setPriceLabel(currency: page.currency, price: page.price, discountedPrice: page.discountedPrice)
+        setStockLabel(stock: page.stock)
+    }
+    
+    private func setThumbnailImage(thumbnail: String) {
+        self.imageCache.loadImage(stringUrl: thumbnail) { image in
+            guard let thumbnailImage = image else { return }
+            DispatchQueue.main.async { [weak self] in
+                self?.thumbnailImage.image = thumbnailImage
+            }
+        }
+    }
+    
+    private func setPriceLabel(currency: Currency, price: Double, discountedPrice: Double) {
         let numberFormatter = NumberFormatter()
         numberFormatter.numberStyle = .decimal
         
-        switch page.currency {
+        switch currency {
         case .krw:
             numberFormatter.maximumFractionDigits = 0
         case .usd:
             numberFormatter.maximumFractionDigits = 1
         }
         
-        let price = numberFormatter.string(for: page.price) ?? ""
-        let discountedPrice = numberFormatter.string(for: page.discountedPrice) ?? ""
+        let priceString = numberFormatter.string(for: price) ?? ""
+        let discountedPriceString = numberFormatter.string(for: discountedPrice) ?? ""
         
-        DispatchQueue.global().async {
-            let imageData = try! Data(contentsOf: URL(string: page.thumbnail)!)
-            let image = UIImage(data: imageData)
-            DispatchQueue.main.async { [weak self] in
-                self?.productImage.image = image
-            }
-        }
         
-        productTitle.text = page.name
-        productId = page.id
         
-        if page.discountedPrice == 0 {
+        if discountedPrice == 0 {
             productDiscountLabel.isHidden = true
-            productPriceLabel.text = "\(page.currency.rawValue) \(price)"
+            productPriceLabel.text = "\(currency.rawValue) \(priceString)"
         } else {
             productDiscountLabel.isHidden = false
-            let priceText = "\(page.currency.rawValue) \(price)"
+            let priceText = "\(currency.rawValue) \(priceString)"
             productPriceLabel.attributedText = NSMutableAttributedString(allText: priceText, previousText: priceText)
-            productDiscountLabel.text = "\(page.currency.rawValue) \(discountedPrice)"
+            productDiscountLabel.text = "\(currency.rawValue) \(discountedPriceString)"
         }
-        
-        if page.stock == 0 {
+    }
+    
+    private func setStockLabel(stock: Int) {
+        if stock == 0 {
             productStockLabel.text = "품절"
             productStockLabel.textColor = .orange
         } else {
-            productStockLabel.text = "잔여수량 : \(page.stock)"
+            productStockLabel.text = "잔여수량 : \(stock)"
             productStockLabel.textColor = .gray
         }
     }

@@ -7,6 +7,7 @@
 import UIKit
 
 final class MainViewController: UIViewController, UIGestureRecognizerDelegate {
+    
     enum Section {
         case main
     }
@@ -17,30 +18,35 @@ final class MainViewController: UIViewController, UIGestureRecognizerDelegate {
     
     private let listCellID: String = "ListPageCell"
     private let gridCellID: String = "GridPageCell"
-    private var productListPage: ProductListPage?
     private let networkManager = NetworkManager()
     private let swipeGesture = UISwipeGestureRecognizer()
+    private var productListPage: ProductListPage?
     
     private lazy var dataSource = UICollectionViewDiffableDataSource<Section, Page>(collectionView: pageCollectionView) { pageCollectionView, indexPath, itemIdentifier in
+        
         switch CustomCollectionView.ViewType(rawValue: self.viewTypeSegmentControl.selectedSegmentIndex) {
         case .list:
             guard let cell = pageCollectionView.dequeueReusableCell(withReuseIdentifier: self.listCellID, for: indexPath) as? ListPageCell else {
+                
                 return UICollectionViewListCell()
             }
             cell.configureCell(page: itemIdentifier)
+            
             return cell
         case .grid:
             guard let cell = pageCollectionView.dequeueReusableCell(withReuseIdentifier: self.gridCellID, for: indexPath) as? GridPageCell else {
+                
                 return UICollectionViewCell()
             }
             cell.configure(page: itemIdentifier)
+            
             return cell
         case .none:
             return UICollectionViewListCell()
         }
     }
     
-    lazy var activityIndicator: UIActivityIndicatorView = {
+    private lazy var activityIndicator: UIActivityIndicatorView = {
         let activityIndicator = UIActivityIndicatorView()
         activityIndicator.frame = CGRect(x: 0, y: 0, width: 50, height: 50)
         activityIndicator.center = self.view.center
@@ -59,16 +65,27 @@ final class MainViewController: UIViewController, UIGestureRecognizerDelegate {
     
     private func configure() {
         pageCollectionView.changeLayout(type: .list)
-        pageCollectionView.register(ListPageCell.self, forCellWithReuseIdentifier: listCellID)
-        pageCollectionView.register(GridPageCell.self, forCellWithReuseIdentifier: gridCellID)
+        registerCell()
+        addIndicator()
+        getProductListPage()
+        addSwipeGesture()
+    }
+    
+    private func addIndicator() {
         self.view.addSubview(activityIndicator)
         self.activityIndicator.startAnimating()
-        getProductListPage()
-        swipeGesture.direction = .right
+    }
+    
+    private func registerCell() {
+        pageCollectionView.register(ListPageCell.self, forCellWithReuseIdentifier: listCellID)
+        pageCollectionView.register(GridPageCell.self, forCellWithReuseIdentifier: gridCellID)
+    }
+    
+    private func addSwipeGesture() {
+        swipeGesture.direction = .left
         swipeGesture.addTarget(self, action: #selector(didSwipe))
         self.view.addGestureRecognizer(swipeGesture)
     }
-    
     
     @IBAction func didChangeSegmentControl(_ sender: UISegmentedControl) {
         switch CustomCollectionView.ViewType(rawValue: sender.selectedSegmentIndex) {
@@ -114,9 +131,9 @@ final class MainViewController: UIViewController, UIGestureRecognizerDelegate {
         }
     }
     
-    @objc func didSwipe(sender: UIGestureRecognizer) {
+    @objc private func didSwipe(sender: UIGestureRecognizer) {
         let isLeftSwipe = viewTypeSegmentControl.selectedSegmentIndex == 0
-        swipeGesture.direction = isLeftSwipe ? .left : .right
+        swipeGesture.direction = isLeftSwipe ? .right : .left
         
         viewTypeSegmentControl.selectedSegmentIndex = isLeftSwipe ? 1 : 0
         

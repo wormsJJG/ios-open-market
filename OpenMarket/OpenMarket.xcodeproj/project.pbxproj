@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		351049722907A4AC00F92E73 /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 351049712907A4AC00F92E73 /* Error.swift */; };
 		351049742907B56E00F92E73 /* Vendor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 351049732907B56E00F92E73 /* Vendor.swift */; };
 		351049762907B60A00F92E73 /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 351049752907B60A00F92E73 /* Image.swift */; };
 		351049902907C3B100F92E73 /* OpenMarketTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3510498F2907C3B100F92E73 /* OpenMarketTests.swift */; };
@@ -22,6 +21,8 @@
 		353A9D782908D76000FA2495 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 353A9D712908CAD900FA2495 /* NetworkManager.swift */; };
 		353A9D792908D76200FA2495 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 353A9D732908CB6600FA2495 /* NetworkError.swift */; };
 		353A9D7A2908D76500FA2495 /* HTTP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 353A9D752908CD3500FA2495 /* HTTP.swift */; };
+		35828B02291363170047D96D /* ImageCacheable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35828B01291363170047D96D /* ImageCacheable.swift */; };
+		35828B04291364420047D96D /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35828B03291364420047D96D /* ImageCache.swift */; };
 		35B483BF290F59A60083012D /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B483BE290F59A60083012D /* Product.swift */; };
 		35BE6CC92911F95F00743A5C /* CustomCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35BE6CC82911F95F00743A5C /* CustomCollectionView.swift */; };
 		35BE6CCB291207DE00743A5C /* CellSelctable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35BE6CCA291207DE00743A5C /* CellSelctable.swift */; };
@@ -48,7 +49,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		351049712907A4AC00F92E73 /* Error.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Error.swift; sourceTree = "<group>"; };
 		351049732907B56E00F92E73 /* Vendor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vendor.swift; sourceTree = "<group>"; };
 		351049752907B60A00F92E73 /* Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
 		3510498D2907C3B100F92E73 /* OpenMarketTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OpenMarketTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -60,6 +60,8 @@
 		353A9D712908CAD900FA2495 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		353A9D732908CB6600FA2495 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 		353A9D752908CD3500FA2495 /* HTTP.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTP.swift; sourceTree = "<group>"; };
+		35828B01291363170047D96D /* ImageCacheable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCacheable.swift; sourceTree = "<group>"; };
+		35828B03291364420047D96D /* ImageCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCache.swift; sourceTree = "<group>"; };
 		35B483BE290F59A60083012D /* Product.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
 		35BE6CC82911F95F00743A5C /* CustomCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCollectionView.swift; sourceTree = "<group>"; };
 		35BE6CCA291207DE00743A5C /* CellSelctable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellSelctable.swift; sourceTree = "<group>"; };
@@ -95,14 +97,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		351049702907A4A100F92E73 /* Error */ = {
-			isa = PBXGroup;
-			children = (
-				351049712907A4AC00F92E73 /* Error.swift */,
-			);
-			path = Error;
-			sourceTree = "<group>";
-		};
 		3510498E2907C3B100F92E73 /* OpenMarketTests */ = {
 			isa = PBXGroup;
 			children = (
@@ -144,6 +138,7 @@
 		352505C4290616F5001A8700 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				35828B002913630D0047D96D /* Cache */,
 				353A9D6B2908C10300FA2495 /* Network */,
 				353A9D6A2908C0F700FA2495 /* Type */,
 			);
@@ -154,6 +149,7 @@
 			isa = PBXGroup;
 			children = (
 				35BE6CCA291207DE00743A5C /* CellSelctable.swift */,
+				35828B01291363170047D96D /* ImageCacheable.swift */,
 			);
 			path = Protocol;
 			sourceTree = "<group>";
@@ -180,6 +176,14 @@
 				353A9D752908CD3500FA2495 /* HTTP.swift */,
 			);
 			path = Network;
+			sourceTree = "<group>";
+		};
+		35828B002913630D0047D96D /* Cache */ = {
+			isa = PBXGroup;
+			children = (
+				35828B03291364420047D96D /* ImageCache.swift */,
+			);
+			path = Cache;
 			sourceTree = "<group>";
 		};
 		35BE6CCC29120B6F00743A5C /* Extension */ = {
@@ -215,7 +219,6 @@
 				C70FB0FA25BEF61C00C9924E /* AppDelegate.swift */,
 				C70FB0FC25BEF61C00C9924E /* SceneDelegate.swift */,
 				353A9D672908BFE200FA2495 /* Protocol */,
-				351049702907A4A100F92E73 /* Error */,
 				352505C4290616F5001A8700 /* Model */,
 				352505C3290616F0001A8700 /* View */,
 				352505C2290616E6001A8700 /* Controller */,
@@ -342,12 +345,13 @@
 				FB07033F29062A55006775BD /* ProductListPage.swift in Sources */,
 				C70FB0FB25BEF61C00C9924E /* AppDelegate.swift in Sources */,
 				353A9D722908CAD900FA2495 /* NetworkManager.swift in Sources */,
+				35828B02291363170047D96D /* ImageCacheable.swift in Sources */,
 				C70FB0FD25BEF61C00C9924E /* SceneDelegate.swift in Sources */,
-				351049722907A4AC00F92E73 /* Error.swift in Sources */,
 				35BE6CC92911F95F00743A5C /* CustomCollectionView.swift in Sources */,
 				353A9D702908C5E500FA2495 /* Currency.swift in Sources */,
 				353A9D762908CD3500FA2495 /* HTTP.swift in Sources */,
 				FB07034129062E66006775BD /* Page.swift in Sources */,
+				35828B04291364420047D96D /* ImageCache.swift in Sources */,
 				353A9D742908CB6600FA2495 /* NetworkError.swift in Sources */,
 				35BE6CCE29120B8600743A5C /* Extension+NSMutableAttributedString.swift in Sources */,
 				351414B62910DFAD00ACD6EF /* ListPageCell.swift in Sources */,
