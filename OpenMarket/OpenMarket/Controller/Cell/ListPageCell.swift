@@ -8,7 +8,6 @@
 import UIKit
 
 final class ListPageCell: UICollectionViewListCell, CellSelectable {
-    
     var productId: Int?
     private let imageLength: CGFloat = 80
     private var contentLayout: [NSLayoutConstraint]?

@@ -34,6 +34,7 @@
 		C70FB10725BEF61D00C9924E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C70FB10525BEF61D00C9924E /* LaunchScreen.storyboard */; };
 		FB07033F29062A55006775BD /* ProductListPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB07033E29062A55006775BD /* ProductListPage.swift */; };
 		FB07034129062E66006775BD /* Page.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB07034029062E66006775BD /* Page.swift */; };
+		FBE9C294291345C4009477FA /* GridPageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBE9C293291345C4009477FA /* GridPageCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -73,6 +74,7 @@
 		C70FB10825BEF61D00C9924E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FB07033E29062A55006775BD /* ProductListPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductListPage.swift; sourceTree = "<group>"; };
 		FB07034029062E66006775BD /* Page.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Page.swift; sourceTree = "<group>"; };
+		FBE9C293291345C4009477FA /* GridPageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridPageCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,6 +116,7 @@
 			isa = PBXGroup;
 			children = (
 				351414B52910DFAD00ACD6EF /* ListPageCell.swift */,
+				FBE9C293291345C4009477FA /* GridPageCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -348,6 +351,7 @@
 				353A9D742908CB6600FA2495 /* NetworkError.swift in Sources */,
 				35BE6CCE29120B8600743A5C /* Extension+NSMutableAttributedString.swift in Sources */,
 				351414B62910DFAD00ACD6EF /* ListPageCell.swift in Sources */,
+				FBE9C294291345C4009477FA /* GridPageCell.swift in Sources */,
 				353A9D6E2908C1FE00FA2495 /* Request.swift in Sources */,
 				351049742907B56E00F92E73 /* Vendor.swift in Sources */,
 				35BE6CCB291207DE00743A5C /* CellSelctable.swift in Sources */,
