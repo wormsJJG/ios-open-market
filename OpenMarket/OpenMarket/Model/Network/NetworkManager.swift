@@ -41,11 +41,4 @@ final class NetworkManager {
         
         dataTask(request: request, completion: completion)
     }
-    
-    func requestData(_ url: URL, completion: @escaping (Result<Data, NetworkError>) -> Void) {
-        var request = URLRequest(url: url)
-        request.httpMethod = HTTPMethod.get
-        
-        dataTask(request: request, completion: completion)
-    }
 }
