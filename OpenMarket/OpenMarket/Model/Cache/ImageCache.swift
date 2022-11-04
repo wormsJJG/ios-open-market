@@ -16,8 +16,8 @@ final class ImageCache: ImageCacheable {
         if let image = cache.object(forKey: stringUrl as NSString) {
             completion(image)
         }
-        guard let url = URL(string: stringUrl) else { return }
-        networkManager.requestData(url) { result in
+        
+        networkManager.getData(requestType: .thubnailImage(thumnailURL: stringUrl)) { result in
             switch result {
             case .success(let data):
                 guard let image = UIImage(data: data) else {

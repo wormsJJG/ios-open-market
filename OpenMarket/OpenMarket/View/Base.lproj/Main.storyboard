@@ -64,6 +64,9 @@
                         </segmentedControl>
                         <barButtonItem key="rightBarButtonItem" style="plain" id="WQp-GH-MHY">
                             <imageReference key="image" image="plus" catalog="system" symbolScale="small"/>
+                            <connections>
+                                <segue destination="8JI-bz-5hy" kind="push" id="Kqo-KV-x5l"/>
+                            </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
@@ -76,30 +79,21 @@
             </objects>
             <point key="canvasLocation" x="965.21739130434787" y="3.3482142857142856"/>
         </scene>
-        <!--View Controller-->
+        <!--상품등록-->
         <scene sceneID="Gfc-VT-lVI">
             <objects>
                 <viewController id="8JI-bz-5hy" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="IFy-CR-z0p">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="GQS-8f-3aZ">
-                                <rect key="frame" x="128" y="241" width="131" height="31"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <segments>
-                                    <segment title="First"/>
-                                    <segment title="Second"/>
-                                </segments>
-                            </segmentedControl>
-                        </subviews>
                         <viewLayoutGuide key="safeArea" id="fqZ-8g-TMn"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
+                    <navigationItem key="navigationItem" title="상품등록" id="89J-vO-d6f"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ELk-Yd-0fz" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="206" y="-756"/>
+            <point key="canvasLocation" x="1820" y="3"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="RMF-1Q-S1L">

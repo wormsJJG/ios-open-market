@@ -9,9 +9,11 @@ import Foundation
 
 final class NetworkManager {
     let urlSession: URLSession
+    private var urlManager: URLManager
     
     init() {
         self.urlSession = URLSession.shared
+        self.urlManager = URLManager()
     }
     
     func dataTask(request: URLRequest, completion: @escaping(Result<Data, NetworkError>) -> Void ) {
@@ -31,7 +33,7 @@ final class NetworkManager {
     }
     
     func getData(requestType: Request, completion: @escaping(Result<Data, NetworkError>) -> Void ) {
-        guard let url = URL(string: requestType.url) else {
+        guard let url = urlManager.requestURL(requestType: requestType)?.url else {
             return completion(.failure(NetworkError.invalidURL))
         }
         var request = URLRequest(url: url)
