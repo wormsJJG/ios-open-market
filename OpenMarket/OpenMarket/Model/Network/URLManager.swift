@@ -27,15 +27,18 @@ struct URLManager {
             component.path = self.path
             component.queryItems = [URLQueryItem(name: "page_no", value: "\(pageNo)"),
                                     URLQueryItem(name: "items_per_page", value: "\(itemsPerPage)")]
+            
             return component
         case .produntInfo(productId: let productId):
             var component = self.baseComponent
             component.path = self.path + "/\(productId)"
+            
             return component
         case .thubnailImage(thumnailURL: let thumbnailURL):
             guard let component = URLComponents(string: thumbnailURL) else {
                 return nil
             }
+            
             return component
         }
     }
