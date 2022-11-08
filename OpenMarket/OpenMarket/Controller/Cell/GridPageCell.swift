@@ -14,52 +14,59 @@ final class GridPageCell: UICollectionViewCell, CellSelectable {
     private lazy var thumbnailImage: UIImageView = UIImageView()
     
     private lazy var productTitle: UILabel = {
-        let lable = UILabel()
-        lable.font = UIFont.preferredFont(forTextStyle: .headline)
+        let lable = UILabel().then {
+            $0.font = UIFont.preferredFont(forTextStyle: .headline)
+        }
         
         return lable
     }()
     
     private lazy var productPriceLabel: UILabel = {
-        let lable = UILabel()
-        lable.font = UIFont.preferredFont(forTextStyle: .callout)
-        lable.textColor = .gray
+        let lable = UILabel().then {
+            $0.font = UIFont.preferredFont(forTextStyle: .callout)
+            $0.textColor = .gray
+        }
         
         return lable
     }()
     
     private lazy var productDiscountLabel: UILabel = {
-        let lable = UILabel()
-        lable.font = UIFont.preferredFont(forTextStyle: .callout)
-        lable.textColor = .gray
+        let lable = UILabel().then {
+            $0.font = UIFont.preferredFont(forTextStyle: .callout)
+            $0.textColor = .gray
+        }
         
         return lable
     }()
     
     private lazy var productStockLabel: UILabel = {
-        let lable = UILabel()
-        lable.font = UIFont.preferredFont(forTextStyle: .callout)
+        let lable = UILabel().then {
+            $0.font = UIFont.preferredFont(forTextStyle: .callout)
+        }
         
         return lable
     }()
     
     private lazy var priceLabelStackView: UIStackView = {
-       let stackView = UIStackView(arrangedSubviews: [productPriceLabel, productDiscountLabel])
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.alignment = .center
-        stackView.distribution = .equalSpacing
-        stackView.axis = .vertical
-        stackView.spacing = 1.0
+        let stackView = UIStackView(arrangedSubviews: [productPriceLabel, productDiscountLabel]).then {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.alignment = .center
+            $0.distribution = .equalSpacing
+            $0.axis = .vertical
+            $0.spacing = 1.0
+        }
         
         return stackView
     }()
     
     private lazy var vStackView: UIStackView = {
         let stackView = UIStackView(arrangedSubviews: [thumbnailImage, productTitle, priceLabelStackView, productStockLabel])
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.alignment = .center
-        stackView.distribution = .equalSpacing
-        stackView.axis = .vertical
+            .then {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.alignment = .center
+            $0.distribution = .equalSpacing
+            $0.axis = .vertical
+        }
         
         return stackView
     }()

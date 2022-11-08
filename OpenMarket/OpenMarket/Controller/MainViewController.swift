@@ -5,6 +5,7 @@
 // 
 
 import UIKit
+import Then
 
 final class MainViewController: UIViewController, UIGestureRecognizerDelegate {
     
@@ -47,13 +48,14 @@ final class MainViewController: UIViewController, UIGestureRecognizerDelegate {
     }
     
     private lazy var activityIndicator: UIActivityIndicatorView = {
-        let activityIndicator = UIActivityIndicatorView()
-        activityIndicator.frame = CGRect(x: 0, y: 0, width: 50, height: 50)
-        activityIndicator.center = self.view.center
-        activityIndicator.color = .blue
-        activityIndicator.hidesWhenStopped = true
-        activityIndicator.style = UIActivityIndicatorView.Style.medium
-        activityIndicator.stopAnimating()
+        let activityIndicator = UIActivityIndicatorView().then {
+            $0.frame = CGRect(x: 0, y: 0, width: 50, height: 50)
+            $0.center = self.view.center
+            $0.color = .blue
+            $0.hidesWhenStopped = true
+            $0.style = UIActivityIndicatorView.Style.medium
+            $0.stopAnimating()
+        }
         
         return activityIndicator
     }()

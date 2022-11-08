@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Then
 
 final class ListPageCell: UICollectionViewListCell, CellSelectable {
     var productId: Int?
@@ -15,10 +16,11 @@ final class ListPageCell: UICollectionViewListCell, CellSelectable {
     private lazy var thumbnailImage = UIImageView()
     private let imageCache = ImageCache.shared
     private let stockLabel: UILabel = {
-        let label = UILabel()
-        label.textAlignment = .right
-        label.numberOfLines = 2
-        label.font = .systemFont(ofSize: 15)
+        let label = UILabel().then {
+            $0.textAlignment = .right
+            $0.numberOfLines = 2
+            $0.font = .systemFont(ofSize: 15)
+        }
         
         return label
     }()
