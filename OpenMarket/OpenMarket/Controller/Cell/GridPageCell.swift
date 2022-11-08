@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import Then
+import SnapKit
 
 final class GridPageCell: UICollectionViewCell, CellSelectable {
     var productId: Int?
@@ -97,14 +99,18 @@ final class GridPageCell: UICollectionViewCell, CellSelectable {
         let inset: CGFloat = 20
         
         contentView.addSubview(vStackView)
-        NSLayoutConstraint.activate([
-            vStackView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: inset),
-            vStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -inset),
-            vStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            vStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            thumbnailImage.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.8),
-            thumbnailImage.heightAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.6)
-        ])
+        
+        vStackView.snp.makeConstraints { stackView in
+            stackView.top.equalTo(contentView.snp.top).offset(inset)
+            stackView.bottom.equalTo(contentView.snp.bottom).offset(-inset)
+            stackView.leading.equalTo(contentView.snp.leading)
+            stackView.trailing.equalTo(contentView.snp.trailing)
+        }
+        
+        thumbnailImage.snp.makeConstraints { imageView in
+            imageView.width.equalTo(contentView.snp.width).multipliedBy(0.8)
+            imageView.height.equalTo(contentView.snp.height).multipliedBy(0.6)
+        }
     }
     
     func configure(page: Page) {

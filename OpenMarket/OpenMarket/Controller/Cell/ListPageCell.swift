@@ -7,6 +7,7 @@
 
 import UIKit
 import Then
+import SnapKit
 
 final class ListPageCell: UICollectionViewListCell, CellSelectable {
     var productId: Int?
@@ -55,24 +56,26 @@ final class ListPageCell: UICollectionViewListCell, CellSelectable {
         
         let height = contentView.heightAnchor.constraint(greaterThanOrEqualToConstant: imageLength)
         height.priority = UILayoutPriority(999)
+        height.isActive = true
         
-        let layouts = [
-            height,
-            thumbnailImage.widthAnchor.constraint(equalToConstant: imageLength-5),
-            thumbnailImage.heightAnchor.constraint(equalToConstant: imageLength-5),
-            thumbnailImage.trailingAnchor.constraint(equalTo: listContentView.leadingAnchor),
-            thumbnailImage.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            thumbnailImage.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
-            
-            listContentView.topAnchor.constraint(equalTo: contentView.topAnchor),
-            listContentView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
-            
-            stockLabel.leadingAnchor.constraint(equalTo: listContentView.trailingAnchor),
-            stockLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -5),
-            stockLabel.widthAnchor.constraint(equalTo: listContentView.widthAnchor, multiplier: 0.5),
-            stockLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 15)
-        ]
-        NSLayoutConstraint.activate(layouts)
+        thumbnailImage.snp.makeConstraints { imageView in
+            imageView.width.height.equalTo(imageLength - 5)
+            imageView.trailing.equalTo(listContentView.snp.leading)
+            imageView.leading.equalTo(contentView.snp.leading)
+            imageView.centerY.equalTo(contentView.snp.centerY)
+        }
+
+        listContentView.snp.makeConstraints { view in
+            view.top.equalTo(contentView.snp.top)
+            view.bottom.equalTo(contentView.snp.bottom)
+        }
+
+        stockLabel.snp.makeConstraints { label in
+            label.leading.equalTo(listContentView.snp.trailing)
+            label.trailing.equalTo(contentView.snp.trailing).offset(-5)
+            label.width.equalTo(listContentView.snp.width).multipliedBy(0.5)
+            label.top.equalTo(contentView.snp.top).offset(15)
+        }
     }
     
     func configureCell(page: Page) {

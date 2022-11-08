@@ -6,6 +6,7 @@
 
 import UIKit
 import Then
+import SnapKit
 
 final class MainViewController: UIViewController, UIGestureRecognizerDelegate {
     
@@ -13,9 +14,42 @@ final class MainViewController: UIViewController, UIGestureRecognizerDelegate {
         case main
     }
     
-    @IBOutlet weak private var viewTypeSegmentControl: UISegmentedControl!
-    @IBOutlet weak private var plusButton: UIBarButtonItem!
-    @IBOutlet weak private var pageCollectionView: CustomCollectionView!
+    private lazy var viewTypeSegmentControl: UISegmentedControl = {
+        let segmentControl = UISegmentedControl(items: ["List", "GRID"]).then {
+            $0.selectedSegmentIndex = 0
+            $0.backgroundColor = .white
+            $0.selectedSegmentTintColor = .systemBlue
+            $0.layer.borderWidth = 2
+            $0.layer.borderColor = UIColor.systemBlue.cgColor
+            $0.addTarget(self, action: #selector(didChangeSegmentControl(_:)), for: .valueChanged)
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.setTitleTextAttributes(UISegmentedControl.segmentSelectedTextAttributes, for: .selected)
+            $0.setTitleTextAttributes(UISegmentedControl.segmentBasicTextAttributes, for: .normal)
+        }
+        
+        return segmentControl
+    }()
+    
+    private lazy var pageCollectionView: CustomCollectionView = {
+        let collectionView = CustomCollectionView(frame: .zero, collectionViewLayout: UICollectionViewLayout()).then {
+            $0.changeLayout(type: .list)
+        }
+        
+        return collectionView
+    }()
+    
+    private lazy var activityIndicator: UIActivityIndicatorView = {
+        let activityIndicator = UIActivityIndicatorView().then {
+            $0.frame = CGRect(x: 0, y: 0, width: 50, height: 50)
+            $0.center = self.view.center
+            $0.color = .blue
+            $0.hidesWhenStopped = true
+            $0.style = UIActivityIndicatorView.Style.medium
+            $0.stopAnimating()
+        }
+        
+        return activityIndicator
+    }()
     
     private let listCellID: String = "ListPageCell"
     private let gridCellID: String = "GridPageCell"
@@ -47,35 +81,45 @@ final class MainViewController: UIViewController, UIGestureRecognizerDelegate {
         }
     }
     
-    private lazy var activityIndicator: UIActivityIndicatorView = {
-        let activityIndicator = UIActivityIndicatorView().then {
-            $0.frame = CGRect(x: 0, y: 0, width: 50, height: 50)
-            $0.center = self.view.center
-            $0.color = .blue
-            $0.hidesWhenStopped = true
-            $0.style = UIActivityIndicatorView.Style.medium
-            $0.stopAnimating()
-        }
-        
-        return activityIndicator
-    }()
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         configure()
     }
     
     private func configure() {
-        pageCollectionView.changeLayout(type: .list)
+        self.view.backgroundColor = .white
+        configureCollectionView()
         registerCell()
+        configureSegmentControl()
         addIndicator()
         getProductListPage()
         addSwipeGesture()
     }
     
+    private func configureSegmentControl() {
+        let width = view.frame.size.width / 2
+        viewTypeSegmentControl.snp.makeConstraints { segment in
+            segment.width.equalTo(width)
+        }
+        
+        navigationItem.titleView = viewTypeSegmentControl
+    }
+    
     private func addIndicator() {
         self.view.addSubview(activityIndicator)
         self.activityIndicator.startAnimating()
+    }
+    
+    private func configureCollectionView() {
+        self.view.addSubview(pageCollectionView)
+        
+        pageCollectionView.snp.makeConstraints { collectionView in
+            collectionView.leading.equalTo(view.safeAreaLayoutGuide.snp.leading)
+            collectionView.top.equalTo(view.safeAreaLayoutGuide.snp.top)
+            collectionView.trailing.equalTo(view.safeAreaLayoutGuide.snp.trailing)
+            collectionView.bottom.equalTo(view.snp.bottom)
+        }
+        registerCell()
     }
     
     private func registerCell() {
@@ -89,7 +133,7 @@ final class MainViewController: UIViewController, UIGestureRecognizerDelegate {
         self.view.addGestureRecognizer(swipeGesture)
     }
     
-    @IBAction func didChangeSegmentControl(_ sender: UISegmentedControl) {
+    @objc func didChangeSegmentControl(_ sender: UISegmentedControl) {
         switch CustomCollectionView.ViewType(rawValue: sender.selectedSegmentIndex) {
         case .list:
             pageCollectionView.changeLayout(type: .list)
