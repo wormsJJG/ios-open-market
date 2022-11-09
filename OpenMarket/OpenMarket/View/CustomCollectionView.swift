@@ -22,18 +22,19 @@ final class CustomCollectionView: UICollectionView {
     }()
     
     private lazy var gridLayout: UICollectionViewFlowLayout = {
-        let layout = UICollectionViewFlowLayout()
-        let inset: CGFloat = 10
-        let rowItem = 2
-        let width = (safeAreaLayoutGuide.layoutFrame.width / CGFloat(rowItem)) - (inset * 1.5)
-        let height = (safeAreaLayoutGuide.layoutFrame.height / 2.6) - inset
-        
-        layout.minimumLineSpacing = inset
-        layout.minimumInteritemSpacing = inset
-        layout.scrollDirection = .vertical
-        layout.itemSize = CGSize(width: width, height: height)
-        layout.sectionInset.left = inset
-        layout.sectionInset.right = inset
+        let layout = UICollectionViewFlowLayout().then {
+            let inset: CGFloat = 10
+            let rowItem = 2
+            let width = (safeAreaLayoutGuide.layoutFrame.width / CGFloat(rowItem)) - (inset * 1.5)
+            let height = (safeAreaLayoutGuide.layoutFrame.height / 2.6) - inset
+            
+            $0.minimumLineSpacing = inset
+            $0.minimumInteritemSpacing = inset
+            $0.scrollDirection = .vertical
+            $0.itemSize = CGSize(width: width, height: height)
+            $0.sectionInset.left = inset
+            $0.sectionInset.right = inset
+        }
         
         return layout
     }()

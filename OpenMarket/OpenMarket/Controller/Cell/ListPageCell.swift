@@ -13,6 +13,7 @@ final class ListPageCell: UICollectionViewListCell, CellSelectable {
     var productId: Int?
     private let imageLength: CGFloat = 80
     private var contentLayout: [NSLayoutConstraint]?
+    //MARK: - UI Compoent
     private lazy var listContentView = UIListContentView(configuration: .subtitleCell())
     private lazy var thumbnailImage = UIImageView()
     private let imageCache = ImageCache.shared
@@ -25,21 +26,21 @@ final class ListPageCell: UICollectionViewListCell, CellSelectable {
         
         return label
     }()
-    
+    // MARK: - init
     override init(frame: CGRect) {
         super.init(frame: frame)
         constraint()
-    }
-
-    override func prepareForReuse() {
-        super.prepareForReuse()
-        thumbnailImage.image = nil
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        thumbnailImage.image = nil
+    }
+    // MARK: - Function
     private func listConfiguration() -> UIListContentConfiguration {
         .subtitleCell()
     }

@@ -8,12 +8,12 @@ import UIKit
 import Then
 import SnapKit
 
-final class MainViewController: UIViewController, UIGestureRecognizerDelegate {
+final class MainViewController: UIViewController {
     
     enum Section {
         case main
     }
-    
+    // MARK: - UI Component
     private lazy var viewTypeSegmentControl: UISegmentedControl = {
         let segmentControl = UISegmentedControl(items: ["List", "GRID"]).then {
             $0.selectedSegmentIndex = 0
@@ -51,6 +51,14 @@ final class MainViewController: UIViewController, UIGestureRecognizerDelegate {
         return activityIndicator
     }()
     
+    private lazy var refreshControl: UIRefreshControl = {
+        let control = UIRefreshControl().then {
+            $0.addTarget(self, action: #selector(didRefresh), for: .valueChanged)
+        }
+        
+        return control
+    }()
+    // MARK: - 변수, 상수
     private let listCellID: String = "ListPageCell"
     private let gridCellID: String = "GridPageCell"
     private let networkManager = NetworkManager()
@@ -73,19 +81,19 @@ final class MainViewController: UIViewController, UIGestureRecognizerDelegate {
                 
                 return UICollectionViewCell()
             }
-            cell.configure(page: itemIdentifier)
+            cell.configureCell(page: itemIdentifier)
             
             return cell
         case .none:
             return UICollectionViewListCell()
         }
     }
-    
+    // MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
         configure()
     }
-    
+    // MARK: - Function
     private func configure() {
         self.view.backgroundColor = .white
         configureCollectionView()
@@ -120,6 +128,7 @@ final class MainViewController: UIViewController, UIGestureRecognizerDelegate {
             collectionView.bottom.equalTo(view.snp.bottom)
         }
         registerCell()
+        pageCollectionView.refreshControl = refreshControl
     }
     
     private func registerCell() {
@@ -156,6 +165,7 @@ final class MainViewController: UIViewController, UIGestureRecognizerDelegate {
                         DispatchQueue.main.async { [weak self] in
                             self?.setSnapShot(pages: productListPage.pages)
                             self?.pageCollectionView.reloadData()
+                            self?.refreshControl.endRefreshing()
                         }
                     } catch {
                         print(error.localizedDescription)
@@ -186,4 +196,12 @@ final class MainViewController: UIViewController, UIGestureRecognizerDelegate {
         pageCollectionView.changeLayout(type: isLeftSwipe ? .grid : .list)
         pageCollectionView.reloadData()
     }
+    
+    @objc private func didRefresh() {
+        getProductListPage()
+    }
+}
+
+extension MainViewController: UIGestureRecognizerDelegate {
+    
 }

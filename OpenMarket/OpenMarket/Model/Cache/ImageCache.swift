@@ -12,7 +12,7 @@ final class ImageCache: ImageCacheable {
     private let networkManager = NetworkManager()
     static let shared = ImageCache()
     
-    func loadImage(stringUrl: String, completion: @escaping (UIImage?) -> Void){
+    func loadImage(stringUrl: String, completion: @escaping (UIImage?) -> Void) {
         if let image = cache.object(forKey: stringUrl as NSString) {
             completion(image)
         }

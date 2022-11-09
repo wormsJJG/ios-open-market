@@ -12,9 +12,8 @@ import SnapKit
 final class GridPageCell: UICollectionViewCell, CellSelectable {
     var productId: Int?
     private let imageCache = ImageCache.shared
-    
+    // MARK: - UI Component
     private lazy var thumbnailImage: UIImageView = UIImageView()
-    
     private lazy var productTitle: UILabel = {
         let lable = UILabel().then {
             $0.font = UIFont.preferredFont(forTextStyle: .headline)
@@ -72,7 +71,7 @@ final class GridPageCell: UICollectionViewCell, CellSelectable {
         
         return stackView
     }()
-
+    // MARK: - init
     override init(frame: CGRect) {
         super.init(frame: frame)
         setCellLayer()
@@ -82,7 +81,7 @@ final class GridPageCell: UICollectionViewCell, CellSelectable {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+    // MARK: - Function
     override func prepareForReuse() {
         super.prepareForReuse()
         productPriceLabel.attributedText = nil
@@ -106,14 +105,14 @@ final class GridPageCell: UICollectionViewCell, CellSelectable {
             stackView.leading.equalTo(contentView.snp.leading)
             stackView.trailing.equalTo(contentView.snp.trailing)
         }
-        
+
         thumbnailImage.snp.makeConstraints { imageView in
             imageView.width.equalTo(contentView.snp.width).multipliedBy(0.8)
-            imageView.height.equalTo(contentView.snp.height).multipliedBy(0.6)
+            imageView.height.equalTo(contentView.snp.height).multipliedBy(0.5)
         }
     }
     
-    func configure(page: Page) {
+    func configureCell(page: Page) {
         productId = page.id
         productTitle.text = page.name
         setThumbnailImage(thumbnail: page.thumbnail)
