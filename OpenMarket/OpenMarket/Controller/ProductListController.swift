@@ -8,7 +8,7 @@ import UIKit
 import Then
 import SnapKit
 
-final class MainViewController: UIViewController {
+final class ProductListController: UIViewController {
     
     enum Section {
         case main
@@ -37,6 +37,12 @@ final class MainViewController: UIViewController {
         
         return collectionView
     }()
+    
+    private lazy var rightBarButtonItem: UIBarButtonItem = UIBarButtonItem(
+        barButtonSystemItem: .add,
+        target: self,
+        action: #selector(didTapRightBarButton)
+    )
     
     private lazy var activityIndicator: UIActivityIndicatorView = {
         let activityIndicator = UIActivityIndicatorView().then {
@@ -93,9 +99,15 @@ final class MainViewController: UIViewController {
         super.viewDidLoad()
         configure()
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        pageCollectionView.reloadData()
+    }
     // MARK: - Function
     private func configure() {
         self.view.backgroundColor = .white
+        self.navigationItem.rightBarButtonItem = rightBarButtonItem
         configureCollectionView()
         registerCell()
         configureSegmentControl()
@@ -146,12 +158,20 @@ final class MainViewController: UIViewController {
         switch CustomCollectionView.ViewType(rawValue: sender.selectedSegmentIndex) {
         case .list:
             pageCollectionView.changeLayout(type: .list)
-            pageCollectionView.reloadData()
+            didChangeLayout()
         case .grid:
             pageCollectionView.changeLayout(type: .grid)
-            pageCollectionView.reloadData()
+            didChangeLayout()
         case .none:
             return
+        }
+    }
+    
+    private func didChangeLayout() {
+        pageCollectionView.reloadData()
+        activityIndicator.startAnimating()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) { [self] in
+            activityIndicator.stopAnimating()
         }
     }
     
@@ -200,8 +220,17 @@ final class MainViewController: UIViewController {
     @objc private func didRefresh() {
         getProductListPage()
     }
+    
+    @objc private func didTapRightBarButton() {
+        let addView = AddViewController()
+        navigationController?.pushViewController(addView, animated: true)
+    }
 }
-
-extension MainViewController: UIGestureRecognizerDelegate {
+// MARK: - UIGestureRecognizerDelegate
+extension ProductListController: UIGestureRecognizerDelegate {
+    
+}
+// MARK: - UICollectionViewDelegate
+extension ProductListController: UICollectionViewDelegate {
     
 }

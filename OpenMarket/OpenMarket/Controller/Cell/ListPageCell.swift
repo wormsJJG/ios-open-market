@@ -16,7 +16,7 @@ final class ListPageCell: UICollectionViewListCell, CellSelectable {
     //MARK: - UI Compoent
     private lazy var listContentView = UIListContentView(configuration: .subtitleCell())
     private lazy var thumbnailImage = UIImageView()
-    private let imageCache = ImageCache.shared
+    private let imageCache = ImageCacheManager.shared
     private let stockLabel: UILabel = {
         let label = UILabel().then {
             $0.textAlignment = .right

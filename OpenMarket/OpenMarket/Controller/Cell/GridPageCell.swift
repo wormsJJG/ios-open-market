@@ -11,7 +11,7 @@ import SnapKit
 
 final class GridPageCell: UICollectionViewCell, CellSelectable {
     var productId: Int?
-    private let imageCache = ImageCache.shared
+    private let imageCache = ImageCacheManager.shared
     // MARK: - UI Component
     private lazy var thumbnailImage: UIImageView = UIImageView()
     private lazy var productTitle: UILabel = {

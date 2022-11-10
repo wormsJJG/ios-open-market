@@ -15,7 +15,7 @@ class Cordinator {
     }
     
     func start() {
-        let rootViewContoller = MainViewController()
+        let rootViewContoller = ProductListController()
         let navigationRootViewController = UINavigationController(rootViewController: rootViewContoller)
         window.rootViewController = navigationRootViewController
         window.makeKeyAndVisible()

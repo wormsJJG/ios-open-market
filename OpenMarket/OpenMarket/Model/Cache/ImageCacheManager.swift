@@ -7,10 +7,10 @@
 
 import UIKit
 
-final class ImageCache: ImageCacheable {
+final class ImageCacheManager: ImageCacheable {
     private(set) var cache = NSCache<NSString, UIImage>()
     private let networkManager = NetworkManager()
-    static let shared = ImageCache()
+    static let shared = ImageCacheManager()
     
     func loadImage(stringUrl: String, completion: @escaping (UIImage?) -> Void) {
         if let image = cache.object(forKey: stringUrl as NSString) {
