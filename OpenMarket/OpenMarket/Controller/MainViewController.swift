@@ -13,11 +13,9 @@ final class MainViewController: UIViewController, UIGestureRecognizerDelegate {
     }
     
     @IBOutlet weak private var viewTypeSegmentControl: UISegmentedControl!
-    @IBOutlet weak private var plusButton: UIBarButtonItem!
+    @IBOutlet weak private var moveToAddViewButton: UIBarButtonItem!
     @IBOutlet weak private var pageCollectionView: CustomCollectionView!
-    
-    private let listCellID: String = "ListPageCell"
-    private let gridCellID: String = "GridPageCell"
+
     private let networkManager = NetworkManager()
     private let swipeGesture = UISwipeGestureRecognizer()
     private var productListPage: ProductListPage?
@@ -26,7 +24,7 @@ final class MainViewController: UIViewController, UIGestureRecognizerDelegate {
         
         switch CustomCollectionView.ViewType(rawValue: self.viewTypeSegmentControl.selectedSegmentIndex) {
         case .list:
-            guard let cell = pageCollectionView.dequeueReusableCell(withReuseIdentifier: self.listCellID, for: indexPath) as? ListPageCell else {
+            guard let cell = pageCollectionView.dequeueReusableCell(withReuseIdentifier: CellID.listCellID, for: indexPath) as? ListPageCell else {
                 
                 return UICollectionViewListCell()
             }
@@ -34,7 +32,7 @@ final class MainViewController: UIViewController, UIGestureRecognizerDelegate {
             
             return cell
         case .grid:
-            guard let cell = pageCollectionView.dequeueReusableCell(withReuseIdentifier: self.gridCellID, for: indexPath) as? GridPageCell else {
+            guard let cell = pageCollectionView.dequeueReusableCell(withReuseIdentifier: CellID.gridCellID, for: indexPath) as? GridPageCell else {
                 
                 return UICollectionViewCell()
             }
@@ -77,8 +75,8 @@ final class MainViewController: UIViewController, UIGestureRecognizerDelegate {
     }
     
     private func registerCell() {
-        pageCollectionView.register(ListPageCell.self, forCellWithReuseIdentifier: listCellID)
-        pageCollectionView.register(GridPageCell.self, forCellWithReuseIdentifier: gridCellID)
+        pageCollectionView.register(ListPageCell.self, forCellWithReuseIdentifier: CellID.listCellID)
+        pageCollectionView.register(GridPageCell.self, forCellWithReuseIdentifier: CellID.gridCellID)
     }
     
     private func addSwipeGesture() {

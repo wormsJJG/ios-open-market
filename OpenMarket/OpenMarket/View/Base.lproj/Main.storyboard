@@ -52,7 +52,7 @@
                     <navigationItem key="navigationItem" id="qLd-Eh-ylm">
                         <nil key="title"/>
                         <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="6Kk-w8-7UB">
-                            <rect key="frame" x="97.5" y="5.5" width="219" height="33"/>
+                            <rect key="frame" x="190.66666666666663" y="8.6666666666666643" width="219" height="33"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <segments>
                                 <segment title="List"/>
@@ -70,8 +70,8 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="moveToAddViewButton" destination="WQp-GH-MHY" id="QbX-EQ-hL7"/>
                         <outlet property="pageCollectionView" destination="DO7-3K-dQX" id="CC6-Xa-W1R"/>
-                        <outlet property="plusButton" destination="WQp-GH-MHY" id="QbX-EQ-hL7"/>
                         <outlet property="viewTypeSegmentControl" destination="6Kk-w8-7UB" id="SD1-jQ-iiU"/>
                     </connections>
                 </viewController>
@@ -101,7 +101,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="hpy-NY-0LJ" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="1Py-3k-ZmX">
-                        <rect key="frame" x="0.0" y="48" width="414" height="44"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="50"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>

@@ -36,6 +36,7 @@
 		C70FB10725BEF61D00C9924E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C70FB10525BEF61D00C9924E /* LaunchScreen.storyboard */; };
 		FB07033F29062A55006775BD /* ProductListPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB07033E29062A55006775BD /* ProductListPage.swift */; };
 		FB07034129062E66006775BD /* Page.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB07034029062E66006775BD /* Page.swift */; };
+		FBC6E025291C841900119301 /* CellID.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBC6E024291C841900119301 /* CellID.swift */; };
 		FBE9C294291345C4009477FA /* GridPageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBE9C293291345C4009477FA /* GridPageCell.swift */; };
 /* End PBXBuildFile section */
 
@@ -78,6 +79,7 @@
 		C70FB10825BEF61D00C9924E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FB07033E29062A55006775BD /* ProductListPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductListPage.swift; sourceTree = "<group>"; };
 		FB07034029062E66006775BD /* Page.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Page.swift; sourceTree = "<group>"; };
+		FBC6E024291C841900119301 /* CellID.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellID.swift; sourceTree = "<group>"; };
 		FBE9C293291345C4009477FA /* GridPageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridPageCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -113,6 +115,7 @@
 			children = (
 				351414B52910DFAD00ACD6EF /* ListPageCell.swift */,
 				FBE9C293291345C4009477FA /* GridPageCell.swift */,
+				FBC6E024291C841900119301 /* CellID.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -343,6 +346,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FBC6E025291C841900119301 /* CellID.swift in Sources */,
 				C70FB0FF25BEF61C00C9924E /* MainViewController.swift in Sources */,
 				351049762907B60A00F92E73 /* Image.swift in Sources */,
 				FB07033F29062A55006775BD /* ProductListPage.swift in Sources */,
