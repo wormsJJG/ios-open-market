@@ -7,24 +7,22 @@
 
 import UIKit
 
-final class ImageCache: ImageCacheable {
-    private(set) var cache = NSCache<NSString, UIImage>()
-    private let networkManager = NetworkManager()
-    static let shared = ImageCache()
+final class ImageCacheManager: ImageCacheable {
+    static var cache = NSCache<NSString, UIImage>()
     
-    func loadImage(stringUrl: String, completion: @escaping (UIImage?) -> Void){
-        if let image = cache.object(forKey: stringUrl as NSString) {
+    static func loadImage(stringUrl: String, completion: @escaping (UIImage?) -> Void) {
+        if let image = ImageCacheManager.cache.object(forKey: stringUrl as NSString) {
             completion(image)
         }
         
-        networkManager.getData(requestType: .thubnailImage(thumnailURL: stringUrl)) { result in
+        NetworkManager.getData(requestType: .thubnailImage(thumnailURL: stringUrl)) { result in
             switch result {
             case .success(let data):
                 guard let image = UIImage(data: data) else {
                     completion(nil)
                     return
                 }
-                self.cache.setObject(image, forKey: stringUrl as NSString)
+                ImageCacheManager.cache.setObject(image, forKey: stringUrl as NSString)
                 completion(image)
             case .failure(let error):
                 print(error.localizedDescription)

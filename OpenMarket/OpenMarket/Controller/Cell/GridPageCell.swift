@@ -9,7 +9,6 @@ import UIKit
 
 final class GridPageCell: UICollectionViewCell, CellSelectable {
     var productId: Int?
-    private let imageCache = ImageCache.shared
     
     private lazy var thumbnailImage: UIImageView = UIImageView()
     
@@ -109,7 +108,7 @@ final class GridPageCell: UICollectionViewCell, CellSelectable {
     }
     
     private func setThumbnailImage(thumbnail: String) {
-        self.imageCache.loadImage(stringUrl: thumbnail) { image in
+        ImageCacheManager.loadImage(stringUrl: thumbnail) { image in
             guard let thumbnailImage = image else { return }
             DispatchQueue.main.async { [weak self] in
                 self?.thumbnailImage.image = thumbnailImage

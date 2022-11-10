@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum CellID {
+enum CellIdentifier {
     static let listCellID: String = "ListPageCell"
     static let gridCellID: String = "GridPageCell"
 }

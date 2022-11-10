@@ -22,7 +22,7 @@
 		353A9D792908D76200FA2495 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 353A9D732908CB6600FA2495 /* NetworkError.swift */; };
 		353A9D7A2908D76500FA2495 /* HTTP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 353A9D752908CD3500FA2495 /* HTTP.swift */; };
 		35828B02291363170047D96D /* ImageCacheable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35828B01291363170047D96D /* ImageCacheable.swift */; };
-		35828B04291364420047D96D /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35828B03291364420047D96D /* ImageCache.swift */; };
+		35828B04291364420047D96D /* ImageCacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35828B03291364420047D96D /* ImageCacheManager.swift */; };
 		35995AF12914E663007EDD1E /* URLManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35995AF02914E663007EDD1E /* URLManager.swift */; };
 		35B483BF290F59A60083012D /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B483BE290F59A60083012D /* Product.swift */; };
 		35BE6CC92911F95F00743A5C /* CustomCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35BE6CC82911F95F00743A5C /* CustomCollectionView.swift */; };
@@ -36,7 +36,7 @@
 		C70FB10725BEF61D00C9924E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C70FB10525BEF61D00C9924E /* LaunchScreen.storyboard */; };
 		FB07033F29062A55006775BD /* ProductListPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB07033E29062A55006775BD /* ProductListPage.swift */; };
 		FB07034129062E66006775BD /* Page.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB07034029062E66006775BD /* Page.swift */; };
-		FBC6E025291C841900119301 /* CellID.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBC6E024291C841900119301 /* CellID.swift */; };
+		FBC6E025291C841900119301 /* CellIdentifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBC6E024291C841900119301 /* CellIdentifier.swift */; };
 		FBE9C294291345C4009477FA /* GridPageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBE9C293291345C4009477FA /* GridPageCell.swift */; };
 /* End PBXBuildFile section */
 
@@ -63,7 +63,7 @@
 		353A9D732908CB6600FA2495 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 		353A9D752908CD3500FA2495 /* HTTP.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTP.swift; sourceTree = "<group>"; };
 		35828B01291363170047D96D /* ImageCacheable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCacheable.swift; sourceTree = "<group>"; };
-		35828B03291364420047D96D /* ImageCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCache.swift; sourceTree = "<group>"; };
+		35828B03291364420047D96D /* ImageCacheManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCacheManager.swift; sourceTree = "<group>"; };
 		35995AF02914E663007EDD1E /* URLManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLManager.swift; sourceTree = "<group>"; };
 		35B483BE290F59A60083012D /* Product.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
 		35BE6CC82911F95F00743A5C /* CustomCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCollectionView.swift; sourceTree = "<group>"; };
@@ -79,7 +79,7 @@
 		C70FB10825BEF61D00C9924E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FB07033E29062A55006775BD /* ProductListPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductListPage.swift; sourceTree = "<group>"; };
 		FB07034029062E66006775BD /* Page.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Page.swift; sourceTree = "<group>"; };
-		FBC6E024291C841900119301 /* CellID.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellID.swift; sourceTree = "<group>"; };
+		FBC6E024291C841900119301 /* CellIdentifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellIdentifier.swift; sourceTree = "<group>"; };
 		FBE9C293291345C4009477FA /* GridPageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridPageCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -115,7 +115,7 @@
 			children = (
 				351414B52910DFAD00ACD6EF /* ListPageCell.swift */,
 				FBE9C293291345C4009477FA /* GridPageCell.swift */,
-				FBC6E024291C841900119301 /* CellID.swift */,
+				FBC6E024291C841900119301 /* CellIdentifier.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -187,7 +187,7 @@
 		35828B002913630D0047D96D /* Cache */ = {
 			isa = PBXGroup;
 			children = (
-				35828B03291364420047D96D /* ImageCache.swift */,
+				35828B03291364420047D96D /* ImageCacheManager.swift */,
 			);
 			path = Cache;
 			sourceTree = "<group>";
@@ -346,7 +346,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FBC6E025291C841900119301 /* CellID.swift in Sources */,
+				FBC6E025291C841900119301 /* CellIdentifier.swift in Sources */,
 				C70FB0FF25BEF61C00C9924E /* MainViewController.swift in Sources */,
 				351049762907B60A00F92E73 /* Image.swift in Sources */,
 				FB07033F29062A55006775BD /* ProductListPage.swift in Sources */,
@@ -358,7 +358,7 @@
 				353A9D702908C5E500FA2495 /* Currency.swift in Sources */,
 				353A9D762908CD3500FA2495 /* HTTP.swift in Sources */,
 				FB07034129062E66006775BD /* Page.swift in Sources */,
-				35828B04291364420047D96D /* ImageCache.swift in Sources */,
+				35828B04291364420047D96D /* ImageCacheManager.swift in Sources */,
 				353A9D742908CB6600FA2495 /* NetworkError.swift in Sources */,
 				35BE6CCE29120B8600743A5C /* Extension+NSMutableAttributedString.swift in Sources */,
 				351414B62910DFAD00ACD6EF /* ListPageCell.swift in Sources */,

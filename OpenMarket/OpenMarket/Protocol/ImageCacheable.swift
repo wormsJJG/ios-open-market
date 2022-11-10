@@ -8,5 +8,5 @@
 import UIKit
 
 protocol ImageCacheable {
-    func loadImage(stringUrl: String, completion: @escaping (UIImage?) -> Void)
+    static func loadImage(stringUrl: String, completion: @escaping (UIImage?) -> Void)
 }

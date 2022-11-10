@@ -13,7 +13,6 @@ final class ListPageCell: UICollectionViewListCell, CellSelectable {
     private var contentLayout: [NSLayoutConstraint]?
     private lazy var listContentView = UIListContentView(configuration: .subtitleCell())
     private lazy var thumbnailImage = UIImageView()
-    private let imageCache = ImageCache.shared
     private let stockLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .right
@@ -112,7 +111,7 @@ final class ListPageCell: UICollectionViewListCell, CellSelectable {
     }
     
     private func setThumbnailImage(thumbnail: String) {
-        self.imageCache.loadImage(stringUrl: thumbnail) { image in
+        ImageCacheManager.loadImage(stringUrl: thumbnail) { image in
             guard let thubnailImage = image else { return }
             DispatchQueue.main.async { [weak self] in
                 self?.thumbnailImage.image = thubnailImage

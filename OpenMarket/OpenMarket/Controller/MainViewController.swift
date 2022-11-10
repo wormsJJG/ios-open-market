@@ -16,15 +16,15 @@ final class MainViewController: UIViewController, UIGestureRecognizerDelegate {
     @IBOutlet weak private var moveToAddViewButton: UIBarButtonItem!
     @IBOutlet weak private var pageCollectionView: CustomCollectionView!
 
-    private let networkManager = NetworkManager()
     private let swipeGesture = UISwipeGestureRecognizer()
     private var productListPage: ProductListPage?
     
-    private lazy var dataSource = UICollectionViewDiffableDataSource<Section, Page>(collectionView: pageCollectionView) { pageCollectionView, indexPath, itemIdentifier in
+    private lazy var dataSource = UICollectionViewDiffableDataSource<Section, Page>(collectionView: pageCollectionView) {
+        pageCollectionView, indexPath, itemIdentifier in
         
         switch CustomCollectionView.ViewType(rawValue: self.viewTypeSegmentControl.selectedSegmentIndex) {
         case .list:
-            guard let cell = pageCollectionView.dequeueReusableCell(withReuseIdentifier: CellID.listCellID, for: indexPath) as? ListPageCell else {
+            guard let cell = pageCollectionView.dequeueReusableCell(withReuseIdentifier: CellIdentifier.listCellID, for: indexPath) as? ListPageCell else {
                 
                 return UICollectionViewListCell()
             }
@@ -32,7 +32,7 @@ final class MainViewController: UIViewController, UIGestureRecognizerDelegate {
             
             return cell
         case .grid:
-            guard let cell = pageCollectionView.dequeueReusableCell(withReuseIdentifier: CellID.gridCellID, for: indexPath) as? GridPageCell else {
+            guard let cell = pageCollectionView.dequeueReusableCell(withReuseIdentifier: CellIdentifier.gridCellID, for: indexPath) as? GridPageCell else {
                 
                 return UICollectionViewCell()
             }
@@ -75,8 +75,8 @@ final class MainViewController: UIViewController, UIGestureRecognizerDelegate {
     }
     
     private func registerCell() {
-        pageCollectionView.register(ListPageCell.self, forCellWithReuseIdentifier: CellID.listCellID)
-        pageCollectionView.register(GridPageCell.self, forCellWithReuseIdentifier: CellID.gridCellID)
+        pageCollectionView.register(ListPageCell.self, forCellWithReuseIdentifier: CellIdentifier.listCellID)
+        pageCollectionView.register(GridPageCell.self, forCellWithReuseIdentifier: CellIdentifier.gridCellID)
     }
     
     private func addSwipeGesture() {
@@ -98,9 +98,13 @@ final class MainViewController: UIViewController, UIGestureRecognizerDelegate {
         }
     }
     
+    private func changeLayoutAction() {
+        
+    }
+    
     private func getProductListPage() {
         DispatchQueue.global().async {
-            self.networkManager.getData(requestType: .productList(pageNo: 1, itemsPerPage: 100)) { result in
+            NetworkManager.getData(requestType: .productList(pageNo: 1, itemsPerPage: 100)) { result in
                 switch result {
                 case .success(let data):
                     do {
